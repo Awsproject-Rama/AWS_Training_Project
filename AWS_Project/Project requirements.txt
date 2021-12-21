@@ -1,0 +1,65 @@
+PROJECT - PART1 (Automation)
+
+CLOUDFORMATION
+
+1)VPC - 10.0.0.0/16
+2)Public subnet - 10.0.1.0/24 (with public IP and private IP)
+	-> Route table and attache IGW
+	-> Internet Gateway - For public subnet
+3)Private subnet - 10.0.3.0/24 (only Private IP)
+	-> Route table
+	-> Attach NAT 
+
+TERRAFORM
+
+In the public subnet
+1) Auto Scaling Group
+	-> Min-2;Max-5
+	-> AMI - Ubuntu18.04
+2)Load Balancer for ASG
+In the private Subnet
+3) One EC2 instance
+	-> AMI - Ubuntu18.04
+
+ANSIBLE:
+
+1)Public EC2 - Install Apache
+2)Create index.html
+3)Private EC2 - Install MySQL
+
+PROJECT - PART2 (Manual)
+
+1) Route53 configuration for VPC internal communication (with hostnames)
+2) Mysql DB should be accessible only from ASG EC2 instances (hint:SG)
+3) Create user to manage Infra (VPC,Route53,EC2) with permissions (hint:IAM policies)
+4) S3 bucket to store Logs (any logs)
+5) All EC2 instances should have access to S3 (hint:IAM role)
+
+PROJECT - PART3 (Manual)
+
+1) Cloud watch dashboard for monitoring
+	i) Network Traffic (N/W IO)
+	ii) EC2 - CPU
+	iii) EC2 - Disk
+	iv) EC2 - Memory
+	v) Load Balancer traffic 
+
+SUBMISSION
+1)Preparing Documentation in word format
+2)Screenshots
+3)Scripts
+4)Presentation(Optional)
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+

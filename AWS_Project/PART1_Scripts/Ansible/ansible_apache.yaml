@@ -1,0 +1,14 @@
+---
+- hosts: publicnode
+  become: yes
+  tasks:
+    - name: Install latest version of Apache
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: create webpage index.html
+      copy:
+        dest: /var/www/html/index.html
+        content:
+              Apache installed successfully

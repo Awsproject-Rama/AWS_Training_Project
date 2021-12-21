@@ -1,0 +1,35 @@
+---
+- hosts: privatenode
+  become: yes
+
+  tasks:
+    - name: Install MySQL
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - mysql-server
+        - mysql-client
+        - python-mysqldb
+
+    - name: Start the MySQL service
+      action: service name=mysql state=started
+
+    - name: Remove the test database
+      mysql_db: name=test state=absent
+
+    - name: Create test user for mysql
+      mysql_user: user="test" host="%" password=admin123 priv=*.*:ALL,GRANT
+
+    - name: Ensure anonymous users are not in the database
+      mysql_user: user='' host=$item state=absent
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
+
+    - name: Update mysql root password for all root accounts
+      mysql_user: name=root host={{item}} password=admin123
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
+
